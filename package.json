@@ -1,0 +1,27 @@
+{
+  "name": "sample",
+  "version": "1.0.0",
+  "description": "bigdata_sample_project",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "build-react": "cd frontend && npm run build",
+    "start-dev": "npm run build-react && electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeongmin1217/bigdata_sample.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeongmin1217/bigdata_sample/issues"
+  },
+  "homepage": "https://github.com/jeongmin1217/bigdata_sample#readme",
+  "devDependencies": {
+    "electron": "^31.3.1",
+    "electron-reload": "^2.0.0-alpha.1"
+  }
+}
