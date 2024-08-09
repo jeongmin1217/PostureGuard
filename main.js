@@ -1,27 +1,17 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
-const url = require('url');
-
-require('electron-reload')(path.join(__dirname, 'frontend', 'build'));
 
 function createWindow() {
-  const mainWindow = new BrowserWindow({
+  const win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
-      contextIsolation: true,
-    },
+      nodeIntegration: true
+    }
   });
 
-  const startUrl = process.env.ELECTRON_START_URL || url.format({
-    pathname: path.join(__dirname, 'frontend', 'build', 'index.html'),
-    protocol: 'file:',
-    slashes: true,
-  });
-
-  mainWindow.loadURL(startUrl);
-  mainWindow.webContents.openDevTools();
+  // 빌드된 React 애플리케이션의 index.html을 로드합니다.
+  win.loadURL(`file://${path.join(__dirname, 'frontend', 'build', 'index.html')}`);
 }
 
 app.on('ready', createWindow);
