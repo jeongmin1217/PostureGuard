@@ -1,0 +1,17 @@
+{
+  "name": "electron-react",
+  "version": "1.0.0",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "start": "npm run build-and-electron",
+    "build-and-electron": "npm run build --prefix frontend && electron .",
+    "build": "react-scripts build",
+    "electron": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^31.3.1",
+    "electron-devtools-installer": "^3.2.0",
+    "electron-is-dev": "^3.0.1"
+  }
+}

@@ -1,9 +1,17 @@
 .App {
   text-align: center;
+  background-color: #F5F5F5;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* font-size: calc(10px + 2vmin); */
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 30vmin;
   pointer-events: none;
 }
 
@@ -14,14 +22,13 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: #F5F5F5;
+  min-height: 91.5vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {
@@ -35,21 +42,4 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-.log-generator-button {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 50px;
-}
-
-.camera-webcam {
-  height: 300px;
-  width: 300px ;
-}
-
-.camera-button {
-  width: 300px;
-  justify-content: space-between;
 }
