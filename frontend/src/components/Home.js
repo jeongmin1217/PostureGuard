@@ -44,10 +44,12 @@ function Home() {
     return (
         <div className="App">
             <div className="header">
-                <img src={`${process.env.PUBLIC_URL}/icon1.PNG`} alt="icon" />
-                <div>
+                <div className='header-icon-div'>
+                    <img className="header-icon" src={`${process.env.PUBLIC_URL}/icon1.PNG`} alt="icon" />
+                </div>
+                <div className='header-text'>
                     <p className='header-title'>Posture Guard</p>
-                    <p className='header-description'>당신의 목, 척추 건강을 지키세요.</p>
+                    <p className='header-description'>당신의 건강을 사수하세요!</p>
                 </div>
             </div>
 

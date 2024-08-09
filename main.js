@@ -24,9 +24,9 @@ function createWindow() {
   
   win.loadURL(startUrl);
 
-  if (isDev) {
-    win.webContents.openDevTools(); // 개발 모드에서 DevTools 자동으로 열기
-  }
+  // if (isDev) {
+  //   win.webContents.openDevTools(); // 개발 모드에서 DevTools 자동으로 열기
+  // }
 }
 
 app.on('ready', createWindow);
