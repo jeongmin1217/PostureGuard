@@ -1,16 +1,96 @@
-.log-generator-button {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 50px;
-  }
-  
-  .camera-webcam {
-    height: 300px;
-    width: 300px ;
-  }
-  
-  .camera-button {
-    width: 300px;
-    justify-content: space-between;
-  }
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  overflow: hidden; /* 스크롤바가 생기지 않도록 설정 */
+}
+
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* 화면 높이를 100%로 설정 */
+}
+
+.header {
+  background-color: #ddddf5;
+  width: 45%;
+  height: 10%;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header img {
+  width: 40px;
+  height: 40px;
+  margin-right: 12.5%;
+}
+
+.header-title {
+  color: #8871e6;
+  font-size: 25px;
+  font-weight: bold;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+  flex-direction: column;
+  margin: 0px;
+}
+
+.header-description {
+  color: #8871e6;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+  margin: 5px 0 0;
+}
+
+.camera-webcam {
+  width: 60%;
+  height: auto;
+  border-radius: 12px;
+  border: 2px solid #877bc4;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.controls button {
+  background-color: #877bc4;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.controls button:hover {
+  background-color: #6d62a3;
+}
+
+.score {
+  background-color: #877bc4;
+  color: white;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

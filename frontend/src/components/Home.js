@@ -7,26 +7,6 @@ function Home() {
     const webcamRef = useRef(null);
     const [intervalId, setIntervalId] = useState(null);
 
-    const startLogGeneration = () => {
-        axios.get('http://localhost:8000/logs/start/')
-            .then(response => {
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.error('There was an error starting log generation!', error);
-            });
-    };
-
-    const stopLogGeneration = () => {
-        axios.get('http://localhost:8000/logs/stop/')
-            .then(response => {
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.error('There was an error stopping log generation!', error);
-            });
-    };
-
     const startCameraCapture = () => {
         if (intervalId) return;  // 이미 시작된 경우 중복 실행 방지
 
@@ -63,28 +43,28 @@ function Home() {
 
     return (
         <div className="App">
-            <header className="App-header">
-                <h5>Control Log Generation</h5>
-                <div className='log-generator-button'>
-                    <button onClick={startLogGeneration}>Start Log eneration</button>
-                    <button onClick={stopLogGeneration}>Stop Log Generation</button>
+            <div className="header">
+                <img src={`${process.env.PUBLIC_URL}/icon1.PNG`} alt="icon" />
+                <div>
+                    <p className='header-title'>Posture Guard</p>
+                    <p className='header-description'>당신의 목, 척추 건강을 지키세요.</p>
                 </div>
-                <h3>Control Camera Capture</h3>
-                <div className='camera'>
-                    <Webcam
-                        audio={false}
-                        ref={webcamRef}
-                        screenshotFormat="image/jpeg"
-                        width="100%"
-                        height="100%"
-                        className='camera-webcam'
-                    />
-                    <div className='camera-button'>
-                        <button onClick={startCameraCapture}>Start Camera Capture</button>
-                        <button onClick={stopCameraCapture}>Stop Camera Capture</button>
-                    </div>
-                </div>
-            </header>
+            </div>
+
+            <div className="camera-container">
+                <Webcam
+                    audio={false}
+                    ref={webcamRef}
+                    screenshotFormat="image/jpeg"
+                    className='camera-webcam'
+                />
+            </div>
+
+            <div className="controls">
+                <button onClick={startCameraCapture}>시작</button>
+                <div className="score">Score: 0</div>
+                <button onClick={stopCameraCapture}>종료</button>
+            </div>
         </div>
     );
 }
