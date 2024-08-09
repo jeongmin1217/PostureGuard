@@ -36,20 +36,3 @@
     transform: rotate(360deg);
   }
 }
-
-.log-generator-button {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 50px;
-}
-
-.camera-webcam {
-  height: 300px;
-  width: 300px ;
-}
-
-.camera-button {
-  width: 300px;
-  justify-content: space-between;
-}
