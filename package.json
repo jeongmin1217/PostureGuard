@@ -16,6 +16,8 @@
     "electron-is-dev": "^3.0.1"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "concurrently": "^8.2.2"
   }
 }
