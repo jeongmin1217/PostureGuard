@@ -3,7 +3,7 @@ import axios from 'axios';
 import Webcam from 'react-webcam';
 import '../styles/home.css';  // 필요한 경우 스타일 파일 포함
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faFileAlt, faStickyNote } from '@fortawesome/free-regular-svg-icons';
+import { faCalendar, faFileAlt } from '@fortawesome/free-regular-svg-icons';
 import { Link } from 'react-router-dom';
 
 function Home() {
@@ -62,7 +62,7 @@ function Home() {
                             </Link>
                         </div>
                         <div className="selectionIcon">
-                            <Link to="/weekly-report">
+                            <Link to="/calendar">
                                 <FontAwesomeIcon icon={faFileAlt} style={{color: "#8871e6", fontSize:"27px"}} />
                             </Link>
                         </div>
