@@ -4,14 +4,18 @@
   "main": "main.js",
   "type": "module",
   "scripts": {
-    "start": "npm run build-and-electron",
     "build-and-electron": "npm run build --prefix frontend && electron .",
     "build": "react-scripts build",
-    "electron": "electron ."
+    "electron": "electron .",
+    "react-start": "cd frontend && npm start",
+    "start": "npm run build-and-electron",
+    "start-dev": "concurrently \"npm run react-start\" \"npx electron .\""
   },
   "devDependencies": {
     "electron": "^31.3.1",
-    "electron-devtools-installer": "^3.2.0",
     "electron-is-dev": "^3.0.1"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
   }
 }

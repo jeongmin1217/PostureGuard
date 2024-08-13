@@ -44,17 +44,7 @@ app.on('activate', () => {
 });
 
 
-// const installExtension = require('electron-devtools-installer');
-
-// app.on('ready', async () => {
-//   await installExtension.default(installExtension.REACT_DEVELOPER_TOOLS)
-//     .then((name) => console.log(`Added Extension:  ${name}`))
-//     .catch((err) => console.log('An error occurred: ', err));
-
-//   createWindow();
-// });
-
-// 일반모드
+// // 일반모드
 // const { app, BrowserWindow } = require('electron');
 // const path = require('path');
 
