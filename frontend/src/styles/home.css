@@ -18,7 +18,7 @@ body, html {
 
 .header {
   background-color: #ddddf5;
-  width: 60%;
+  width: 75%;
   height: 11.5%;
   display: flex;
   align-items: center;
@@ -28,27 +28,8 @@ body, html {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.header-text {
-  color: #8871e6;
-  font-weight: bold;
-  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    'Liberation Sans', sans-serif;
-  flex-direction: column;
-  text-align: center;
-  width: 100%;
-}
-
-.header p {
-  padding: 0 !important;
-  margin: 0;
-}
-
-.header-title {
-  font-size: 20px;
-}
-
 .header-icon-div {
-  margin-left: 5%;
+  margin-left: 4%;
   margin-right: auto;
   margin-top: 1%;
 }
@@ -58,16 +39,160 @@ body, html {
   height: 40px;
 }
 
+.header-main {
+  color: #8871e6;
+  font-weight: bold;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  'Liberation Sans', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header-main-text {
+  margin-left: 5%;
+  text-align: left;
+}
+
+.header p {
+  padding: 0 !important;
+  margin: 0;
+}
+
+.header-title {
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.header-description {
+  color: black;
+  font-size: 11px;
+}
+
+.header-main-icon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 7%;
+}
+
+.selectionIcon {
+  width: 10%;
+  height: 3%;
+}
+
+.main-content {
+  display: flex;
+  width: 75%;
+  margin-bottom: 20px;
+  height: 48vh;
+}
+
+.camera-container {
+  width: 65%;
+  display: flex;
+  justify-content: center;
+}
+
 .camera-webcam {
-  width: 60%;
+  width: 100%;
   height: auto;
+  border-radius: 15px;
+}
+
+.loading-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* 부모 요소에 맞게 중앙 정렬 */
+  color: #8871e6; /* 로딩 아이콘 색상 */
+}
+
+.loading-icon p {
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.description-container {
+  width: 27%;
+  background-color: #f8f8ff; /*fffafa*/
   border-radius: 12px;
+  padding: 3%;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-color: #ddddf5;
+  border-style: solid;
+  border-width: 3px;
+}
+
+.description-title {
+  color : #8871e6;
+  font-size: 2.0vw;
+  font-weight: bold;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  'Liberation Sans', sans-serif;
+}
+
+.description {
+  font-size: 1.2vw;
+  margin-bottom: 15%;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  'Liberation Sans', sans-serif;
+}
+
+.description-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4열 */
+  grid-template-rows: repeat(2, 1fr); /* 2행 */
+  gap: 1%;
+  height: 50%;
+}
+
+.description-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1%;
+  background-color: white; /*fffafa*/
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-color: #ddddf5;
+  border-style: dotted;
+  border-width: 1px;
+}
+
+.description-grid {
+  border-color: #ddddf5;
+  border-style: solid;
+  border-width: 2px;
+}
+
+.description-box p {
+  font-size: 1.2vw; /* 화면 크기에 따라 유동적으로 변하는 글꼴 크기 */
+  margin: 0;
 }
 
 .controls {
+  background-color: #ddddf5;
+  width: 75%;
+  height: 11.5%;
   display: flex;
+  align-items: center;
   justify-content: center;
-  margin-top: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.controls-main {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2%;
 }
 
 .controls button {
@@ -80,6 +205,7 @@ body, html {
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s;
+  width: 25%;
 }
 
 .controls button:hover {
@@ -92,8 +218,6 @@ body, html {
   border-radius: 8px;
   padding: 10px 20px;
   font-size: 16px;
-  margin: 0 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
+  width: 33%;
 }

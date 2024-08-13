@@ -1,0 +1,231 @@
+.container {
+    width: 75%;
+    height: calc(90% - 65px); /* 전체 높이에서 하단 바 높이와 여백을 뺀 값으로 설정 */
+    margin: auto;
+    border: 1px solid rgba(128, 128, 128, 0.267);
+    border-radius: 12px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1px
+}
+
+button {
+    cursor: pointer;
+}
+
+.header-calendar {
+  background-color: #ddddf5;
+  width: 100%;
+  height: 61px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-calendar-icon-div {
+  margin-left: 4%;
+  margin-right: auto;
+  margin-top: 1%;
+}
+
+.header-calendar-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.header-calendar-main {
+  color: #8871e6;
+  font-weight: bold;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  'Liberation Sans', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header-calendar-main-text {
+  margin-left: 5%;
+  text-align: left;
+}
+
+.header-calendar p {
+  padding: 0 !important;
+  margin: 0;
+}
+
+.header-calendar-title {
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.header-calendar-description {
+  color: black;
+  font-size: 11px;
+}
+
+.header-calendar-main-icon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 7%;
+}
+
+.selectionIcon {
+  width: 10%;
+  height: 3%;
+}
+
+.calendar-main {
+  width: 100%;
+  height: auto;
+}
+
+.yearAndMonthSelect {
+  appearance: none; /* 기본 선택박스 스타일 제거 (크로스 브라우저 호환성 고려) */
+  -webkit-appearance: none; /* 사파리 브라우저 호환성 */
+  -moz-appearance: none; /* 파이어폭스 브라우저 호환성 */
+  background-color: #f0f0f0; /* 배경색 */
+  border: 1px solid #ccc; /* 테두리 색상 */
+  padding: 10px 15px; /* 안쪽 여백 */
+  font-size: 15px; /* 글씨 크기 */
+  border-radius: 5px; /* 둥근 테두리 */
+  outline: none;
+  cursor: pointer; 
+  transition: all 0.3s ease;
+}
+
+.yearAndMonthSelect:hover {
+  background-color: #e0e0e0; /* 마우스 오버 시 배경색 변경 */
+}
+
+.yearAndMonthSelect:focus {
+  border-color: #333; /* 포커스 시 테두리 색상 변경 */
+}
+
+.yearAndMonthSelect option {
+  background-color: #ffffff; /* 옵션 배경색 */
+  color: #333333; /* 옵션 글씨 색상 */
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    margin: 2% 0;
+}
+
+.title h3 {
+  margin: 0 10px; /* 화살표와의 간격 */
+  font-size: 15px; /* 폰트 크기 조정 */
+  font-weight: bold;
+}
+
+.title > button {
+  background: none;
+  border: none;
+  font-size: 24px; /* 화살표 크기 조정 */
+  cursor: pointer;
+  padding: 0 10px; /* 클릭 가능한 영역 넓히기 */
+  color: #333; /* 화살표 색상 */
+}
+
+.title button:hover {
+  color: #000; /* 마우스 오버 시 화살표 색상 변경 */
+}
+
+.container .week {
+display: flex;
+}
+
+.container .week .weekday {
+  width: calc(100% / 7); /* 각 칸이 주어진 전체 폭의 7분의 1을 차지하게 수정 */
+  text-align: center;
+}
+
+.container .week .sunday {
+color: red;
+}
+
+.container .week .saturday {
+color: blue;
+}
+
+.container .date {
+margin-top: 10px;
+}
+
+.container .date .weekday {
+  width: calc(100% / 7); /* 각 칸이 주어진 전체 폭의 7분의 1을 차지하게 수정 */
+  float: left;
+  text-align: center;
+  height: 45px;
+  line-height: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.container .date .sunday {
+color: red;
+
+}
+
+.container .date .saturday {
+color: blue;
+}
+
+.container .date .today {
+  background-color: #cccced;
+  color: white;
+  font-weight: 700;
+}
+
+.container .date .weekday .schedule {
+    color: black;
+    font-size: 12px;
+    height: 10px;
+    font-weight: 1000;
+}
+
+.bottom-bar {
+  background-color: #ddddf5;
+  width: 93%;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  bottom: 7px; /* 페이지 하단으로부터 간격을 설정 */
+}
+
+.go-to-webcam {
+  width: 30%;
+  height: 70%;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+  7px 7px 20px 0px rgba(0,0,0,.1),
+  4px 4px 5px 0px rgba(0,0,0,.1);
+  outline: none;
+  background-color: #877bc4;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  cursor: pointer;
+}
