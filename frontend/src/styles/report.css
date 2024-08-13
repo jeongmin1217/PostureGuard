@@ -1,11 +1,18 @@
+@font-face {
+    font-family: 'CustomFont';
+    src: url('../assets/fonts/custom-font.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: Arial, sans-serif;
     background-color: #f5f5f5;
     overflow: hidden; /* 스크롤바가 생기지 않도록 설정 */
-  }
+    font-family: 'CustomFont';
+}
 
 .App-report {
     text-align: center;
@@ -42,8 +49,7 @@ body, html {
 .header-report-main {
     color: #8871e6;
     font-weight: bold;
-    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    'Liberation Sans', sans-serif;
+    font-family: 'CustomFont';
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -64,11 +70,14 @@ body, html {
     font-size: 15px;
     font-weight: 900;
     line-height: 2cap;
+    letter-spacing: 0.5px;
 }
 
 .header-report-description {
     color: black;
     font-size: 10px;
+    font-weight: 550;
+    letter-spacing: 0.5px;
 }
 
 .header-report-main-icon {
@@ -106,8 +115,8 @@ body, html {
     color : #6d62a3;
     font-size: 1.7vw;
     font-weight: bold;
-    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-    'Liberation Sans', sans-serif;
+    font-family: 'CustomFont';
+    letter-spacing: 0.5px;
 }
 
 .short-line {
@@ -140,13 +149,14 @@ body, html {
     color: white;
     border: none;
     border-radius: 5px;
-    font-family: 'Lato', sans-serif;
+    font-family: 'CustomFont';
     font-weight: 500;
     padding: 10px 20px;
     margin: 0 10px;
     font-size: 16px;
     cursor: pointer;
     width: 30%;
+    letter-spacing: 0.5px;
 }
   
 .controls-report button:hover {
