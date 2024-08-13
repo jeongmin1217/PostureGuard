@@ -2,12 +2,13 @@
     width: 75%;
     height: calc(90% - 65px); /* 전체 높이에서 하단 바 높이와 여백을 뺀 값으로 설정 */
     margin: auto;
-    padding: 20px 20px;
     border: 1px solid rgba(128, 128, 128, 0.267);
+    border-radius: 12px;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    padding: 1px
 }
 
 button {
@@ -71,45 +72,72 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-right: 4%;
+  margin-right: 7%;
 }
 
 .selectionIcon {
   width: 10%;
   height: 3%;
 }
+
 .calendar-main {
   width: 100%;
   height: auto;
 }
 
-.calendar-main h3 {
-  margin-left: 4%;
+.yearAndMonthSelect {
+  appearance: none; /* 기본 선택박스 스타일 제거 (크로스 브라우저 호환성 고려) */
+  -webkit-appearance: none; /* 사파리 브라우저 호환성 */
+  -moz-appearance: none; /* 파이어폭스 브라우저 호환성 */
+  background-color: #f0f0f0; /* 배경색 */
+  border: 1px solid #ccc; /* 테두리 색상 */
+  padding: 10px 15px; /* 안쪽 여백 */
+  font-size: 15px; /* 글씨 크기 */
+  border-radius: 5px; /* 둥근 테두리 */
+  outline: none;
+  cursor: pointer; 
+  transition: all 0.3s ease;
 }
 
-.container .title {
+.yearAndMonthSelect:hover {
+  background-color: #e0e0e0; /* 마우스 오버 시 배경색 변경 */
+}
+
+.yearAndMonthSelect:focus {
+  border-color: #333; /* 포커스 시 테두리 색상 변경 */
+}
+
+.yearAndMonthSelect option {
+  background-color: #ffffff; /* 옵션 배경색 */
+  color: #333333; /* 옵션 글씨 색상 */
+}
+
+.title {
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    position: relative;
+    margin: 2% 0;
 }
 
-.container .title > button {
-    border: none;
-    margin-left: 5px;
-    height: 20px;
-    align-self: center;
-    background: none;
+.title h3 {
+  margin: 0 10px; /* 화살표와의 간격 */
+  font-size: 15px; /* 폰트 크기 조정 */
+  font-weight: bold;
 }
 
-.container .title .pagination {
-margin-left: auto;
-align-self: center;
+.title > button {
+  background: none;
+  border: none;
+  font-size: 24px; /* 화살표 크기 조정 */
+  cursor: pointer;
+  padding: 0 10px; /* 클릭 가능한 영역 넓히기 */
+  color: #333; /* 화살표 색상 */
 }
-.container .title .pagination button {
-margin: 0 10px;
-border: none;
-background: none;
+
+.title button:hover {
+  color: #000; /* 마우스 오버 시 화살표 색상 변경 */
 }
 
 .container .week {
@@ -153,9 +181,9 @@ color: blue;
 }
 
 .container .date .today {
-background-color: #8871e6;
-color: white;
-font-weight: 700;
+  background-color: #cccced;
+  color: white;
+  font-weight: 700;
 }
 
 .container .date .weekday .schedule {
@@ -199,4 +227,5 @@ font-weight: 700;
   align-items: center;
   text-align: center;
   justify-content: center;
+  cursor: pointer;
 }

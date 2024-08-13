@@ -5,10 +5,12 @@ import '../styles/home.css';  // 필요한 경우 스타일 파일 포함
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faFileAlt } from '@fortawesome/free-regular-svg-icons';
 import { Link } from 'react-router-dom';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 function Home() {
     const webcamRef = useRef(null);
     const [intervalId, setIntervalId] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const startCameraCapture = () => {
         if (intervalId) return;  // 이미 시작된 경우 중복 실행 방지
@@ -34,6 +36,12 @@ function Home() {
             console.log('Capture stopped');
         }
     };
+
+    // 카메라가 처음 렌더링된 후 로딩 상태 해제
+    useEffect(() => {
+        setLoading(false);
+    }, []);
+
 
     // Clean up interval on unmount
     useEffect(() => {
@@ -62,7 +70,7 @@ function Home() {
                             </Link>
                         </div>
                         <div className="selectionIcon">
-                            <Link to="/calendar">
+                            <Link to="/report">
                                 <FontAwesomeIcon icon={faFileAlt} style={{color: "#8871e6", fontSize:"27px"}} />
                             </Link>
                         </div>
@@ -72,12 +80,19 @@ function Home() {
 
             <div className="main-content">
                 <div className="camera-container">
-                    <Webcam
-                        audio={false}
-                        ref={webcamRef}
-                        screenshotFormat="image/jpeg"
-                        className='camera-webcam'
-                    />
+                    {loading ? (
+                        <div className="loading-icon">
+                            <FontAwesomeIcon icon={faSpinner} spin size="3x" />
+                            <p>카메라 로딩 중</p>
+                        </div>
+                    ) : (
+                        <Webcam
+                            audio={false}
+                            ref={webcamRef}
+                            screenshotFormat="image/jpeg"
+                            className='camera-webcam'
+                        />
+                    )}
                 </div>
                 <div className="description-container">
                     <p className="description-title">실시간 자세 분석</p>

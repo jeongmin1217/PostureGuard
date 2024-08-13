@@ -1,0 +1,154 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    overflow: hidden; /* 스크롤바가 생기지 않도록 설정 */
+  }
+
+.App-report {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* 화면 높이를 100%로 설정 */
+}
+
+.header-report {
+    background-color: #ddddf5;
+    width: 75%;
+    height: 11.5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-report-icon-div {
+    margin-left: 4%;
+    margin-right: auto;
+    margin-top: 1%;
+}
+
+.header-report-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.header-report-main {
+    color: #8871e6;
+    font-weight: bold;
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.header-report-main-text {
+    margin-left: 5%;
+    text-align: left;
+}
+
+.header-report p {
+    padding: 0 !important;
+    margin: 0
+}
+
+.header-report-title {
+    font-size: 15px;
+    font-weight: 900;
+    line-height: 2cap;
+}
+
+.header-report-description {
+    color: black;
+    font-size: 10px;
+}
+
+.header-report-main-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 4%;
+}
+
+.selectionIcon-report {
+    width: 10%;
+    height: 3%;
+}
+
+.main-content-report {
+    display: flex;
+    width: 75%;
+    margin-bottom: 15px;
+    height: 48vh;
+}
+
+.posture-container {
+    width: 50%;
+    background-color: #f8f8ff; /*fffafa*/
+    padding: 0.3%;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    border-color: #ddddf5;
+    border-style: dotted;
+    border-width: 3px;
+}
+  
+.posture-container-title {
+    color : #6d62a3;
+    font-size: 1.7vw;
+    font-weight: bold;
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    'Liberation Sans', sans-serif;
+}
+
+.short-line {
+    width: 60px;
+    height: 1.2px;
+    background-color: #6d62a3; /* 줄의 색상 */
+    margin: 3px auto;
+  }
+  
+.controls-report {
+    background-color: #ddddf5;
+    width: 75%;
+    height: 11.5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.controls-report button {
+    box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+    7px 7px 20px 0px rgba(0,0,0,.1),
+    4px 4px 5px 0px rgba(0,0,0,.1);
+    outline: none;
+    background-color: #877bc4;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 30%;
+}
+  
+.controls-report button:hover {
+    background-color: #6d62a3;
+}

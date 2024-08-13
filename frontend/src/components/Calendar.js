@@ -5,6 +5,7 @@ import style from '../styles/calendar.css';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileAlt } from '@fortawesome/free-regular-svg-icons';
+import { faHome } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(style);
 
@@ -77,6 +78,7 @@ const Calendar = () => {
     }
     return (
       <select
+        className="yearAndMonthSelect"
         onChange={changeSelectMonth}
         value={selectedMonth}
       >
@@ -99,7 +101,7 @@ const Calendar = () => {
     }
     return (
       <select
-        // className="yearSelect"
+        className="yearAndMonthSelect"
         onChange={changeSelectYear}
         value={selectedYear}
       >
@@ -221,7 +223,12 @@ const Calendar = () => {
                 </div>
                 <div className='header-calendar-main-icon'>
                     <div className="selectionIcon">
-                        <Link to="/calendar">
+                        <Link to="/">
+                            <FontAwesomeIcon icon={faHome} style={{color: "#8871e6", fontSize:"27px"}} />
+                        </Link>
+                    </div>
+                    <div className="selectionIcon">
+                        <Link to="/report">
                             <FontAwesomeIcon icon={faFileAlt} style={{color: "#8871e6", fontSize:"27px"}} />
                         </Link>
                     </div>
@@ -230,20 +237,16 @@ const Calendar = () => {
         </div>
         <div className="calendar-main">
           <div className="title">
-              <h3>
-              {yearControl()}년 {monthControl()}월
-              </h3>
-              <div className="pagination">
-                <button onClick={prevMonth}>◀︎</button>
-                <button onClick={nextMonth}>▶︎</button>
-              </div>
+              <button onClick={prevMonth}>‹</button>
+              <h3>{yearControl()}년 {monthControl()}월</h3>
+              <button onClick={nextMonth}>›</button>
           </div>
           <div className="week">{returnWeek()}</div>
           <div className="date">{returnDay()}</div>
         </div>
-        <div className="bottom-bar">
+        {/* <div className="bottom-bar">
           <button className="go-to-webcam"><Link to="/" style={{ color:"white", textDecoration: "none" }}>홈으로 돌아가기</Link></button>
-        </div>
+        </div> */}
     </div>
   );
 };
