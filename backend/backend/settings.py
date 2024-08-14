@@ -26,8 +26,12 @@ SECRET_KEY = 'django-insecure-#x%t9x9_6uh6ol54p*-1!ar8tqac+k)dt5vx*f5(c-qz^lee=g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '210.123.95.211',  # Django 서버의 IP 주소
+    '34.64.75.62',  # Spark 스트리밍 애플리케이션이 접근하는 외부 IP 주소 (GCP의 IP 주소)
+]
 
 # Application definition
 
@@ -38,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
     'logs',
     'corsheaders',
 ]
@@ -74,6 +79,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'backend.wsgi.application'
+
+# Channels의 기본 ASGI 애플리케이션 경로를 설정합니다.
+ASGI_APPLICATION = "backend.asgi.application"
+
+# Channels 레이어 설정 (기본 메모리 레이어를 사용합니다. Redis를 사용할 수도 있습니다.)
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 
 KAFKA_BOOTSTRAP_SERVERS = 'localhost:9092'
 

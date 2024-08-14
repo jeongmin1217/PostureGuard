@@ -18,7 +18,7 @@ def calculate_angle_3d(point1, point2, point3):
     cosine_angle = np.dot(ba, bc) / (np.linalg.norm(ba) * np.linalg.norm(bc))
     angle = np.arccos(cosine_angle)
     
-    return np.degrees(angle)
+    return round(np.degrees(angle), 2)
 
 def analyze_posture(image):
     """이미지를 받아서 자세 분석 결과를 반환하는 함수"""
