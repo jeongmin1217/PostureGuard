@@ -10,10 +10,49 @@ import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 function Home() {
     const webcamRef = useRef(null);
     const [intervalId, setIntervalId] = useState(null);
+    const allowUpdates = useRef(true);  // 상태 업데이트를 제어할 플래그
     const [loading, setLoading] = useState(true);
+    const [cvaLeft, setCvaLeft] = useState('-');
+    const [cvaRight, setCvaRight] = useState('-');
+    const [fhaLeft, setFhaLeft] = useState('-');
+    const [fhaRight, setFhaRight] = useState('-');
+    const [postureMessage, setPostureMessage] = useState('자세를 분석합니다');
+
+    useEffect(() => {
+        setLoading(false);
+
+        // WebSocket 연결 설정
+        const socket = new WebSocket('ws://210.123.95.211:8000/ws/logs/');
+
+        socket.onmessage = function(event) {
+            if (!allowUpdates.current) return;  // 상태 업데이트가 허용되지 않으면 종료
+
+            const data = JSON.parse(event.data);
+
+            // 수신된 데이터로 상태 업데이트
+            setCvaLeft(data.cva_left);
+            setCvaRight(data.cva_right);
+            setFhaLeft(data.fha_left);
+            setFhaRight(data.fha_right);
+
+            // posture_correct 값에 따라 메시지 설정
+            if (data.posture_correct === 'Yes') {
+                setPostureMessage('옳은 자세입니다');
+            } else if (data.posture_correct === 'No') {
+                setPostureMessage('자세를 바르게 해주세요');
+            }
+        };
+
+        return () => {
+            socket.close(); // 컴포넌트 언마운트 시 소켓 연결 해제
+        };
+    }, []);
 
     const startCameraCapture = () => {
         if (intervalId) return;  // 이미 시작된 경우 중복 실행 방지
+        // 상태 업데이트 허용
+        allowUpdates.current = true;
+
 
         const capture = async () => {
             const imageSrc = webcamRef.current.getScreenshot();
@@ -35,6 +74,14 @@ function Home() {
             setIntervalId(null);
             console.log('Capture stopped');
         }
+        // 상태 업데이트 중지
+        allowUpdates.current = false;
+
+        setCvaLeft('-');
+        setCvaRight('-');
+        setFhaLeft('-');
+        setFhaRight('-');
+        setPostureMessage('자세를 분석합니다');
     };
 
     // 카메라가 처음 렌더링된 후 로딩 상태 해제
@@ -105,25 +152,25 @@ function Home() {
                             <p>CVA L</p>
                         </div>
                         <div className="description-box">
-                            <p>-</p>
+                            <p>{cvaLeft}</p>
                         </div>
                         <div className="description-box">
                             <p>CVA R</p>
                         </div>
                         <div className="description-box">
-                            <p>-</p>
+                            <p>{cvaRight}</p>
                         </div>
                         <div className="description-box">
                             <p>FHA L</p>
                         </div>
                         <div className="description-box">
-                            <p>-</p>
+                            <p>{fhaLeft}</p>
                         </div>
                         <div className="description-box">
                             <p>FHA R</p>
                         </div>
                         <div className="description-box">
-                            <p>-</p>
+                            <p>{fhaRight}</p>
                         </div>
                     </div>
                 </div>
@@ -132,7 +179,7 @@ function Home() {
             <div className="controls">
                 <div className="controls-main">
                     <button onClick={startCameraCapture}>시작</button>
-                    <div className="score">자세를 분석합니다</div>
+                    <div className="score">{postureMessage}</div>
                     <button onClick={stopCameraCapture}>종료</button>
                 </div>
             </div>
