@@ -59,7 +59,7 @@ def analyze_posture(image):
         # 자세가 올바른지 여부 판단
         posture_correct = (cva_left >= 50 or cva_right >= 50) and (fha_left >= 80 or fha_right >= 80)
 
-        return cva_left, cva_right, fha_left, fha_right, "Yes" if posture_correct else "No"
+        return cva_left, cva_right, fha_left, fha_right, True if posture_correct else False
     
-    return None, None, None, None, "No"
+    return None, None, None, None, False
 

@@ -36,9 +36,9 @@ function Home() {
             setFhaRight(data.fha_right);
 
             // posture_correct 값에 따라 메시지 설정
-            if (data.posture_correct === 'Yes') {
+            if (data.posture_correct === true) {
                 setPostureMessage('옳은 자세입니다');
-            } else if (data.posture_correct === 'No') {
+            } else if (data.posture_correct === false) {
                 setPostureMessage('자세를 바르게 해주세요');
             }
         };
