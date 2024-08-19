@@ -31,6 +31,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '210.123.95.211',  # Django 서버의 IP 주소
     '34.64.75.62',  # Spark 스트리밍 애플리케이션이 접근하는 외부 IP 주소 (GCP의 IP 주소)
+    '172.30.1.76',
 ]
 
 # Application definition
