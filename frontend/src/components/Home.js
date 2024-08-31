@@ -36,9 +36,9 @@ function Home() {
             setFhaRight(data.fha_right);
 
             // posture_correct 값에 따라 메시지 설정
-            if (data.posture_correct === 'Yes') {
+            if (data.posture_correct === true) {
                 setPostureMessage('옳은 자세입니다');
-            } else if (data.posture_correct === 'No') {
+            } else if (data.posture_correct === false) {
                 setPostureMessage('자세를 바르게 해주세요');
             }
         };
@@ -58,12 +58,12 @@ function Home() {
             const imageSrc = webcamRef.current.getScreenshot();
             try {
                 await axios.post('http://localhost:8000/logs/send-image/', { image: imageSrc });
-                console.log('Image sent to server');
+                console.log('Image sent to server at ', new Date().toISOString());
             } catch (error) {
                 console.error('There was an error sending the image!', error);
             }
         };
-        const id = setInterval(capture, 1000); // 1초 간격으로 이미지 캡처 및 전송
+        const id = setInterval(capture, 100); // 외부 작업시 50ms & 집에서 작업시 400ms 간격으로 이미지 캡처 및 전송
         setIntervalId(id);
         console.log('Capture started');
     };

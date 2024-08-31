@@ -1,9 +1,11 @@
 from kafka import KafkaConsumer
-import cv2
-import numpy as np
 import json
 import os
-import time
+from datetime import datetime
+import pytz
+
+# 한국 시간대 설정
+kst = pytz.timezone('Asia/Seoul')
 
 # Kafka 컨슈머 설정
 consumer = KafkaConsumer(
@@ -11,44 +13,49 @@ consumer = KafkaConsumer(
     bootstrap_servers='localhost:9092',
     auto_offset_reset='earliest',  # 처음부터 읽기
     enable_auto_commit=True,  # 오프셋 자동 커밋 활성화
-    group_id='image-consumer-group'
+    group_id='image-consumer-group-new'
     # Kafka의 오프셋이 각 컨슈머 그룹이 어디까지 메세지를 읽었는지 기억하기 때문에..! 한 번 읽었으면 그것은 다시 읽지 않음
     # 이전 것까지 모두 가져오기 위해서는 새로운 consumer group 이름, 위와 같은 세팅으로 코드 돌리면 수집 가능함.
 )
 
 # 저장할 폴더 설정
-output_folder = 'received_images'
+today_date = datetime.now(kst).strftime('%Y%m%d')
+output_folder = f'kafka-data/{today_date}'
+
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)
 
-# 메시지 수신 및 이미지 저장
-image_counter = 0
+# 메시지 수신 및 JSON 파일로 저장
+json_counter = 0
 for message in consumer:
     try:
-        image_bytes = message.value
-        headers = {k: v.decode('utf-8') for k, v in message.headers}
-        log_message = json.loads(headers.get('log', '{}'))
-        print(f"Log Message: {log_message}")
+        # 메시지의 값은 JSON 형식의 문자열
+        message_value = message.value.decode('utf-8')
+        
+        # 파티션 정보 출력
+        partition = message.partition
+        print(f"Received message from partition: {partition}")
 
-        # 이미지 디코딩
-        nparr = np.frombuffer(image_bytes, np.uint8)
-        img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        # JSON 데이터 파싱
+        json_data = json.loads(message_value)
 
-        # 이미지 파일로 저장
-        image_filename = os.path.join(output_folder, f'image_{image_counter}.jpg')
-        cv2.imwrite(image_filename, img)
-        print(f"Saved {image_filename}")
+        # 파일명 생성 (timestamp를 기반으로 고유한 파일명 생성)
+        timestamp = json_data['timestamp'].replace(":", "-").replace(" ", "_")
+        file_name = f"kafka_{timestamp}.json"
 
-        image_counter += 1
+        # JSON 데이터를 파일로 저장
+        with open(os.path.join(output_folder, file_name), 'w') as json_file:
+            json.dump(json_data, json_file, indent=4)
+        
+        print(f"Saved {file_name} in {output_folder}")
+
+        json_counter += 1
 
         # 메시지 처리 후 오프셋 커밋
         consumer.commit()
 
-        # # 테스트를 위해 6개만 저장하고 종료
-        # if image_counter >= 6:
-        #     break
     except Exception as e:
         print(f"Error processing message: {e}")
         continue
 
-print("Finished saving images.")
+print(f"Finished saving {json_counter} json files.")
