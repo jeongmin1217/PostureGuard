@@ -61,5 +61,5 @@ def analyze_posture(image):
 
         return cva_left, cva_right, fha_left, fha_right, True if posture_correct else False
     
-    return None, None, None, None, False
-
+    else:
+        return None, None, None, None, None

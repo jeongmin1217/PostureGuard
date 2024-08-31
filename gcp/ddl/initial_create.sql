@@ -1,10 +1,10 @@
 CREATE TABLE postureguard-432006.dataset_pg.tb_posture (
     posture_id STRING NOT NULL,
     img_filename STRING NOT NULL,
-    cva_left_value FLOAT,
-    cva_right_value FLOAT,
-    fha_left_value FLOAT,
-    fha_right_value FLOAT,
+    cva_left_value FLOAT64,
+    cva_right_value FLOAT64,
+    fha_left_value FLOAT64,
+    fha_right_value FLOAT64,
     posture_status BOOLEAN,  -- BOOLEAN 타입으로 설정
     user_id STRING NOT NULL,
     day_id INTEGER,
@@ -52,3 +52,34 @@ CREATE TABLE postureguard-432006.dataset_pg.tb_week (
     week_value INTEGER, -- 주 번호 (예: 34번째 주)
     year_id INTEGER -- 연도와 연결하기 위한 외래 키
 );
+
+CREATE TABLE postureguard-432006.dataset_pg.tb_daily_stat (
+    daily_stat_id STRING, -- 기본 키
+    year_id INTEGER, -- 
+    month_id INTEGER, -- 
+    day_id INTEGER, --
+    avg_left_shoulder_x FLOAT64, -- 
+    avg_left_shoulder_y FLOAT64, -- 
+    avg_right_shoulder_x FLOAT64, -- 
+    avg_right_shoulder_y FLOAT64, -- 
+    avg_left_ear_x FLOAT64, -- 
+    avg_left_ear_y FLOAT64, -- 
+    avg_right_ear_x FLOAT64, -- 
+    avg_right_ear_y FLOAT64, -- 
+    avg_c7_x FLOAT64, -- 
+    avg_c7_y FLOAT64, -- 
+    posture_correct BOOLEAN, --
+    img_filename STRING, --
+    cnt INTEGER
+);
+
+ALTER TABLE postureguard-432006.dataset_pg.tb_daily_stat
+ADD COLUMN avg_left_shoulder_z FLOAT64;
+ALTER TABLE postureguard-432006.dataset_pg.tb_daily_stat
+ADD COLUMN avg_right_shoulder_z FLOAT64;
+ALTER TABLE postureguard-432006.dataset_pg.tb_daily_stat
+ADD COLUMN avg_left_ear_z FLOAT64;
+ALTER TABLE postureguard-432006.dataset_pg.tb_daily_stat
+ADD COLUMN avg_right_ear_z FLOAT64;
+ALTER TABLE postureguard-432006.dataset_pg.tb_daily_stat
+ADD COLUMN avg_c7_z FLOAT64;

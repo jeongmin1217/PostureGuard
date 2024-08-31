@@ -4,17 +4,12 @@ from pyspark.sql.types import StructType, StructField, StringType
 import cv2
 import numpy as np
 import json
-from neck_angle_detection import analyze_posture
+from gcp.neck_angle_detection import analyze_posture
 # import requests
 from google.cloud import storage
 import uuid
 import asyncio
 import aiohttp
-
-# GCS 클라이언트 생성
-gcs_client = storage.Client()
-# GCS 설정
-bucket_name = 'posture-guard'
 
 # Spark 세션 생성
 spark = SparkSession.builder \
@@ -33,9 +28,12 @@ df = spark.readStream \
     .format("kafka") \
     .option("kafka.bootstrap.servers", "210.123.95.211:9093") \
     .option("subscribe", "image-topic") \
-    .option("startingOffsets", "earliest") \
+    .option("startingOffsets", "latest") \
     .option("kafka.group.id", "image-consumer-group") \
     .load()
+
+# 데이터를 카프카에 맞춰 6개 파티션으로 재분배하여 병렬 처리
+df = df.repartition(6)
 
 # Kafka 메시지의 key와 value를 JSON으로 변환 및 파싱
 df = df.selectExpr("CAST(value AS STRING)") \
@@ -47,11 +45,24 @@ async def send_analyze_result(result):
     async with aiohttp.ClientSession() as session:
         async with session.post('http://210.123.95.211:8000/logs/analyze-result/', json=result) as response:
             return await response.json()
+        
+# 배치마다 데이터를 병렬로 처리
+def process_batch(batch_df, batch_id):
+    batch_df.foreachPartition(process_partition)
 
 # 메시지 수신 및 분석 처리 함수
-def process_batch(batch_df, batch_id):
+def process_partition(partition):
     try:
-        for row in batch_df.collect():
+        # Spark가 데이터를 여러 워커 노드로 보내서 병렬 처리하는 과정에서
+        # Python의 객체들을 "직렬화" (데이터를 전송 가능한 형태로 변환) 해야 하는데, GCS 객체는 직렬화가 불가능함.
+        # 따라서 global로 선언하지 않고 함수 내에 선언
+        
+        # GCS 클라이언트 생성
+        gcs_client = storage.Client()
+        # GCS 설정
+        bucket_name = 'posture-guard'
+
+        for row in partition:
             image_data = row['image_data']  # 16진수 인코딩된 이미지 데이터
             timestamp = row['timestamp']  # 타임스탬프 데이터 (문자열)
 
