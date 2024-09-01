@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faFileAlt } from '@fortawesome/free-regular-svg-icons';
 import { Link } from 'react-router-dom';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import Modal from './Modal';  // 모달 컴포넌트 가져오기
 
 function Home() {
     const webcamRef = useRef(null);
@@ -17,6 +18,8 @@ function Home() {
     const [fhaLeft, setFhaLeft] = useState('-');
     const [fhaRight, setFhaRight] = useState('-');
     const [postureMessage, setPostureMessage] = useState('자세를 분석합니다');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
 
     useEffect(() => {
         setLoading(false);
@@ -63,9 +66,12 @@ function Home() {
                 console.error('There was an error sending the image!', error);
             }
         };
-        const id = setInterval(capture, 100); // 외부 작업시 50ms & 집에서 작업시 400ms 간격으로 이미지 캡처 및 전송
+        const id = setInterval(capture, 500); // 500ms 간격으로 이미지 캡처 및 전송
         setIntervalId(id);
         console.log('Capture started');
+        // 모달 창 표시
+        setModalMessage('실시간 자세 분석을 시작합니다');
+        setIsModalOpen(true);
     };
 
     const stopCameraCapture = () => {
@@ -82,6 +88,10 @@ function Home() {
         setFhaLeft('-');
         setFhaRight('-');
         setPostureMessage('자세를 분석합니다');
+        // 모달 창 표시
+        setModalMessage('실시간 자세 분석을 종료합니다');
+        setIsModalOpen(true);
+
     };
 
     // 카메라가 처음 렌더링된 후 로딩 상태 해제
@@ -101,6 +111,12 @@ function Home() {
 
     return (
         <div className="App">
+            <Modal 
+            isOpen={isModalOpen} 
+            onClose={() => setIsModalOpen(false)} 
+            message={modalMessage} 
+            />
+
             <div className="header">
                 <div className='header-icon-div'>
                     <img className="header-icon" src={`${process.env.PUBLIC_URL}/icon1.PNG`} alt="icon" />
@@ -117,7 +133,7 @@ function Home() {
                             </Link>
                         </div>
                         <div className="selectionIcon">
-                            <Link to="/report">
+                            <Link to="/weekly-report">
                                 <FontAwesomeIcon icon={faFileAlt} style={{color: "#8871e6", fontSize:"27px"}} />
                             </Link>
                         </div>

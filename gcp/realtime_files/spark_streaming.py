@@ -14,7 +14,11 @@ import aiohttp
 # Spark 세션 생성
 spark = SparkSession.builder \
     .appName("Kafka-Spark-Streaming-Processing") \
+    .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer") \
     .getOrCreate()
+
+# 배치 간격을 500ms로 설정하여 데이터 수집 속도에 맞춤
+spark.conf.set("spark.sql.streaming.batchDuration", "500ms")
 
 # Kafka message JSON 스키마 정의
 schema = StructType([
