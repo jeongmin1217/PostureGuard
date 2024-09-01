@@ -66,7 +66,7 @@ function Home() {
                 console.error('There was an error sending the image!', error);
             }
         };
-        const id = setInterval(capture, 500); // 500ms 간격으로 이미지 캡처 및 전송
+        const id = setInterval(capture, 600); // 600ms 간격으로 이미지 캡처 및 전송
         setIntervalId(id);
         console.log('Capture started');
         // 모달 창 표시
