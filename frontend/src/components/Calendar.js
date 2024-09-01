@@ -21,30 +21,22 @@ const Calendar = () => {
   const [selectedMonth, setSelectedMonth] = useState(today.month); //현재 선택된 달
   const dateTotalCount = new Date(selectedYear, selectedMonth, 0).getDate(); //선택된 연도, 달의 마지막 날짜
   
-  const [detectionData, setDetectionData] = useState([]);
+  const [dataByMonth, setDataByMonth] = useState({}); // 연 단위로 가져온 데이터
+
   const navigate = useNavigate();
-  const handleClickScore = (dateString) => {
-    // navigate(`/detail-chart/${dateString}`); //날짜에 맞는 데이터로 이동
+
+  useEffect(() => {
+    checkDataForYear();
+  }, [selectedYear]);
+
+  const checkDataForYear = async () => {
+    const response = await axios.get('http://localhost:8000/logs/check-date-data/', {
+      params: {
+        year_id: selectedYear,
+      },
+    });
+    setDataByMonth(response.data.data_by_month);
   };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    // detectionData가 변경될 때마다 returnDay 함수 호출
-    returnDay();
-  }, [detectionData]);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('http://127.0.0.1:8000/detection/');
-      setDetectionData(response.data);
-      console.log("detectionData", detectionData);
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   const prevMonth = useCallback(() => {
     //이전 달 보기 보튼
@@ -142,14 +134,17 @@ const Calendar = () => {
     let dayArr = [];
 
     for (const nowDay of week) {
+
       const day = new Date(selectedYear, selectedMonth - 1, 1).getDay();
+
       if (week[day] === nowDay) {
+
         for (let i = 0; i < dateTotalCount; i++) {
-            const currentDate = new Date(selectedYear, selectedMonth - 1, i + 2);
-            const dateString = currentDate.toISOString().split('T')[0];
-            // console.log("dateString", dateString)
-            const score = getScoreForDate(dateString);
-  
+            // const currentDate = new Date(selectedYear, selectedMonth - 1, i + 2);
+            // const dateString = currentDate.toISOString().split('T')[0];
+            const dayNumber = i + 1;
+            const daysWithData = dataByMonth[selectedMonth] || [];
+            // console.log("dateString", dateString)  
             dayArr.push(
                 <div
                 key={i + 1}
@@ -159,7 +154,7 @@ const Calendar = () => {
                     today:
                         today.year === selectedYear &&
                         today.month === selectedMonth &&
-                        today.date === i + 1,
+                        today.date === dayNumber,
                     },
                     { weekday: true }, //전체 날짜 스타일
                     {
@@ -168,7 +163,7 @@ const Calendar = () => {
                         new Date(
                         selectedYear,
                         selectedMonth - 1,
-                        i + 1
+                        dayNumber
                         ).getDay() === 0,
                     },
                     {
@@ -177,16 +172,15 @@ const Calendar = () => {
                         new Date(
                         selectedYear,
                         selectedMonth - 1,
-                        i + 1
+                        dayNumber
                         ).getDay() === 6,
                     }
                 )}
-                onClick={() => handleClickScore(dateString)} // 클릭 이벤트 핸들러 설정
+                onClick={() => handleClickScore(dayNumber)} // 클릭 이벤트 핸들러 설정
                 >
-                {i + 1}
-                {score && <span className="schedule" style={{ cursor: "pointer" }}>{score}점</span>}
-                {/* {i + 1 === 10 && <span className="schedule">일정</span>}  */}
-                {/* 10일에 해당하는 날짜 밑에 "일정"이라는 텍스트가 표시됩니다 */}
+                {dayNumber}
+                {/* 날짜 밑에 점 표시 */}
+                {daysWithData.includes(dayNumber) && <span className="dot" style={{ color: "#6d62a3", cursor: "pointer", fontWeight: "bold" }}>•</span>}
                 </div>
             );
         }
@@ -194,20 +188,12 @@ const Calendar = () => {
         dayArr.push(<div className="weekday"></div>);
       }
     }
-
     return dayArr;
-  }, [selectedYear, selectedMonth, dateTotalCount, detectionData]);
-  
-  const getScoreForDate = (dateString) => {
-    const detection = detectionData.find((item) => {
-      const startDateTime = item.start_time.substring(0, 10);
-    //   console.log("startDateTime", startDateTime)
-      return startDateTime === dateString;
-    });
+  }, [dataByMonth, selectedYear, selectedMonth, dateTotalCount]);
 
-    return detection ? detection.score : null;
-  };
-
+  function handleClickScore(day) {
+    navigate(`/daily-report/${selectedYear}/${selectedMonth}/${day}`);
+  }
 
   return (
 
@@ -228,7 +214,7 @@ const Calendar = () => {
                         </Link>
                     </div>
                     <div className="selectionIcon">
-                        <Link to="/report">
+                        <Link to="/weekly-report">
                             <FontAwesomeIcon icon={faFileAlt} style={{color: "#8871e6", fontSize:"27px"}} />
                         </Link>
                     </div>

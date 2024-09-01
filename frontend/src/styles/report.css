@@ -83,7 +83,8 @@ body, html {
 .header-report-main-icon {
     display: flex;
     align-items: center;
-    margin-right: 4%;
+    justify-content: space-between;
+    margin-right: 7%;
 }
 
 .selectionIcon-report {
@@ -109,6 +110,8 @@ body, html {
     border-color: #ddddf5;
     border-style: dotted;
     border-width: 3px;
+    align-items: center;
+    justify-content: center;
 }
   
 .posture-container-title {
@@ -117,6 +120,12 @@ body, html {
     font-weight: bold;
     font-family: 'CustomFont';
     letter-spacing: 0.5px;
+}
+
+.posture-container img {
+    width: 70%;
+    height: 75%;
+    /* margin-bottom: 5%; */
 }
 
 .short-line {
@@ -137,7 +146,7 @@ body, html {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.controls-report button {
+.controls-report p {
     box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
     7px 7px 20px 0px rgba(0,0,0,.1),
     4px 4px 5px 0px rgba(0,0,0,.1);
@@ -154,11 +163,26 @@ body, html {
     padding: 10px 20px;
     margin: 0 10px;
     font-size: 16px;
-    cursor: pointer;
     width: 30%;
     letter-spacing: 0.5px;
 }
   
 .controls-report button:hover {
     background-color: #6d62a3;
+}
+
+.loading-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* 화면 전체 높이에서 중앙 정렬 */
+    color: #8871e6; /* 로딩 아이콘 색상     color: #333; */
+}
+
+.loading-icon p {
+    margin-top: 10px;
+    font-size: 18px;
+    font-family: 'CustomFont';
+    letter-spacing: 0.5px;
 }
