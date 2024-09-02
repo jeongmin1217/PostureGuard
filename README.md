@@ -39,7 +39,7 @@ https://github.com/user-attachments/assets/cfb2e5e5-910f-43f9-8625-2170290d006a
 - <b>일주일 간의 분석 데이터를 제공하겠다는 분석 목적에 기반, </b>준실시간 데이터 분석을 통해 수집된 데이터를 일일 배치로 하루 평균의 이미지와 값을 분석해 BigQuery와 Google Cloud Storage에 저장하여 주간 데이터 분석을 효율적으로 진행하고자 함<br>
 - 일주일간의 평균 기록을 BigQuery 데이터 집계 마트를 이용해 효율적 분석 진행
 
-> ### Spark, Kafka Performance Comparison
+> ## Spark, Kafka Performance Comparison
 
 > #### Spark : 1만개의 평균 45KB json 파일 처리 및 분석 작업 기준
 >
@@ -57,3 +57,7 @@ https://github.com/user-attachments/assets/cfb2e5e5-910f-43f9-8625-2170290d006a
 > | **데이터 전송 시간**  | 50ms | 50ms |              600ms               |
 > | **토픽 파티션 수**    |  6   |  20  |                6                 |
 > | **노트북 CPU 사용량** | 35%  | 45%  |               23%                |
+
+## Review
+
+> 명확한 문제 정의 기반의 이해하기 쉬운 데이터 아키텍처의 설계는 곧, 추후 효율적이고 간편한 분석 작업을 가능하게 하며 분석의 범주 또한 확대할 수 있는 기반을 마련한다는 점을 느낌.
