@@ -11,7 +11,9 @@
 
 ## Project Overview
 
-https://github.com/user-attachments/assets/cfb2e5e5-910f-43f9-8625-2170290d006a
+https://github.com/user-attachments/assets/5139f6a0-843b-455b-b520-0b6b204c5c15
+
+
 
 <h3>[Description]</h3>
 1. 준실시간(600ms) 데이터 분석을 통한 자세 모니터링<br>
